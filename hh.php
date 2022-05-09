@@ -77,5 +77,6 @@ if ( ! class_exists( 'HHInit' ) ) :
 	 * Require files before
 	 */
 	require PLUGIN_CLASSES_PATH . 'class-hh-login.php';
+	require PLUGIN_CLASSES_PATH . 'class-hh-upgrade.php';
 	new HHInit();
 endif;
