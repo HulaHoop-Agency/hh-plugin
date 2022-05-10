@@ -2,7 +2,7 @@
 /*
  * Plugin name: Misha Update Checker
  * Description: This simple plugin does nothing, only gets updates from a custom server
- * Version: 1.0
+ * Version: 0.2
  * Author: Misha Rudrastyh
  * Author URI: https://rudrastyh.com
  * License: GPL
@@ -25,9 +25,10 @@ if ( ! class_exists( 'mishaUpdateChecker' ) ) {
 
 		public function __construct() {
 
-			$this->plugin_slug   = plugin_basename( __DIR__ );
-			$this->version       = '1.0';
-			$this->cache_key     = 'misha_custom_upd';
+			$this->plugin_slug   = 'hh-theme';
+			$this->plugin_main   = 'hh-plugin/hh-plugin.php';
+			$this->version       = '0.2';
+			$this->cache_key     = 'hulahoop_plugin_check';
 			$this->cache_allowed = false;
 			$this->json          = 'https://staging-env.fr/update/info.json';
 
@@ -48,7 +49,8 @@ if ( ! class_exists( 'mishaUpdateChecker' ) ) {
 					array(
 						'timeout' => 10,
 						'headers' => array(
-							'Accept' => 'application/json',
+							'Authorization' => 'Basic ' . base64_encode( 'preprod:votrepreprod' ),
+							'Accept'        => 'application/json',
 						),
 					)
 				);
@@ -72,7 +74,7 @@ if ( ! class_exists( 'mishaUpdateChecker' ) ) {
 		}
 
 
-		function info( $res, $action, $args ) {
+		public function info( $res, $action, $args ) {
 
 			// do nothing if you're not getting plugin information right now
 			if ( 'plugin_information' !== $action ) {
@@ -138,7 +140,7 @@ if ( ! class_exists( 'mishaUpdateChecker' ) ) {
 			) {
 				$res              = new stdClass();
 				$res->slug        = $this->plugin_slug;
-				$res->plugin      = plugin_basename( __FILE__ ); // misha-update-plugin/misha-update-plugin.php
+				$res->plugin      = $this->plugin_main;
 				$res->new_version = $remote->version;
 				$res->tested      = $remote->tested;
 				$res->package     = $remote->download_url;
@@ -151,14 +153,13 @@ if ( ! class_exists( 'mishaUpdateChecker' ) ) {
 
 		}
 
-		public function purge() {
+		public function purge( $upgrader_object, $options ) {
 
 			if (
 				$this->cache_allowed
 				&& 'update' === $options['action']
 				&& 'plugin' === $options['type']
 			) {
-				// just clean the cache when new plugin version is installed
 				delete_transient( $this->cache_key );
 			}
 

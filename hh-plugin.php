@@ -3,11 +3,11 @@
 /**
  * Plugin Name:       HulaHoop
  * Description:       Custom plugin made by HulaHoop for better website production.
- * Version:           1.0
+ * Version:           0.2
  * Requires at least: 3.0 or higher
  * Requires PHP:      5.6
  * Tested up to:      5.9
- * Stable tag:        1.0
+ * Stable tag:        0.2
  * Author:            HulaHoop
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
