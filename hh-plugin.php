@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       HulaHoop
+ * Plugin Name:       HH Plugin
  * Description:       Custom plugin made by HulaHoop for better website production.
  * Version:           1.0
  * Requires at least: 3.0 or higher
