@@ -78,5 +78,6 @@ if ( ! class_exists( 'HHInit' ) ) :
 	 */
 	require PLUGIN_CLASSES_PATH . 'class-hh-login.php';
 	require PLUGIN_CLASSES_PATH . 'class-hh-upgrade.php';
+	require PLUGIN_CLASSES_PATH . 'class-wordfence.php';
 	new HHInit();
 endif;
