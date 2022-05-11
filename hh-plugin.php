@@ -40,8 +40,14 @@ if ( ! class_exists( 'HHInit' ) ) :
 		 */
 		public function setup_actions() {
 			register_activation_hook( __FILE__, 'add_timestamp' );
+			register_activation_hook( __FILE__, 'import_wf_config' );
 			register_activation_hook( __FILE__, 'register_cron' );
 			register_deactivation_hook( __FILE__, 'remove_timestamp' );
+
+			function import_wf_config() {
+				require PLUGIN_CLASSES_PATH . 'class-wordfence.php';
+			}
+
 			function add_timestamp() {
 				if ( ! get_option( 'HULAHOOP-TIMESTAMP' ) ) {
 					add_option( 'HULAHOOP-TIMESTAMP', current_time( 'timestamp' ) );
@@ -78,6 +84,5 @@ if ( ! class_exists( 'HHInit' ) ) :
 	 */
 	require PLUGIN_CLASSES_PATH . 'class-hh-login.php';
 	require PLUGIN_CLASSES_PATH . 'class-hh-upgrade.php';
-	require PLUGIN_CLASSES_PATH . 'class-wordfence.php';
 	new HHInit();
 endif;
